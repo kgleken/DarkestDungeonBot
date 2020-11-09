@@ -1,7 +1,9 @@
 # DarkestDungeonBot
 
 Requirements:
+
 RoboJumper's save file editor - https://github.com/robojumper/DarkestDungeonSaveEditor
+
 Xbox360 CE - https://www.x360ce.com/
 
 Instructions:
