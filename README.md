@@ -1,5 +1,8 @@
 # DarkestDungeonBot
 
+See it working, in action, on my Youtube channel -
+https://www.youtube.com/watch?v=DgWzT4rqnTQ
+
 **Requirements:**
 
 RoboJumper's save file editor - https://github.com/robojumper/DarkestDungeonSaveEditor
