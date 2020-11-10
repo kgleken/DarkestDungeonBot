@@ -8,7 +8,7 @@ Xbox360 CE - https://www.x360ce.com/
 
 **Instructions:**
 1. Install the latest version of Python (3.8) and use whatever IDE you want, I like using PyCharm which is free with the base version.
-2. Check the list of includes at the top of each file and install and the necessary packages using pip, or just right click and let Pycharm add the to the virtual environment for your project
+2. Check the list of includes at the top of each file and install and the necessary packages using pip, or just right click and let Pycharm add them to the virtual environment for your project
 3. Open Xbox360 CE and set it up to match the button configuration contained in the Controls.py file
 4. The program uses the pydirectinput python library which has a feature that allows it throw an exception when you move the mouse cursor to one of the corners of the screen. Do that or switch to your IDE whenever you need to stop the program
 
