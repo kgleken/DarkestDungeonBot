@@ -1,7 +1,7 @@
 # DarkestDungeonBot
 
 See it working, in action, on my Youtube channel -
-https://www.youtube.com/watch?v=DgWzT4rqnTQ
+https://www.youtube.com/watch?v=XcX_klvC1zk
 
 **Requirements:**
 
