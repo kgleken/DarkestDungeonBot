@@ -10,11 +10,18 @@ RoboJumper's save file editor - https://github.com/robojumper/DarkestDungeonSave
 Xbox360 CE - https://www.x360ce.com/
 
 **Instructions:**
-1. Install the latest version of Python (3.8) and use whatever IDE you want, I like using PyCharm which is free with the base version.
-2. Check the list of includes at the top of each file and install and the necessary packages using pip, or just right click and let Pycharm add them to the virtual environment for your project
-3. Open Xbox360 CE and set it up to match the button configuration contained in the Controls.py file
-4. The program uses the pydirectinput python library which has a feature that allows it throw an exception when you move the mouse cursor to one of the corners of the screen. Do that or switch to your IDE whenever you need to stop the program
-5. If you have a second monitor, you can use it to watch the console/log output while the program is running
+1. Start Xbox360 CE (Controller Emulator) and click the checkbox that says "Enable 0 Mapped Devices" beneath the Controller 1 tab
+2. Click the "Add" button with the plus icon in the Controller 1 tab. Your mouse and keyboard should already be selected by default, click "Add Selected Device"
+3. Open the x360ce.xml file using a text editor and copy the entire contents
+4. Click the "Paste Preset" button at the button to import the controller settings. The Xbox360 CE app allows you to save the settings, feel free to do so
+5. Minimize Xbox360 CE to the system tray. It is now ready to go. Remember to exit the application later when your are finished using it
+	Note: If you wish to use a custom controller configuration instead, you will need to edit Controls.py and rebuild the DDbot.exe
+6. Extract/Unzip the DarkestDungeonSaveEditor package to it's own folder and place it in the same directory as the DDbot executable
+7. Open the settings.json file and change the default settings if needed. The game install location you will probably not need to change. The save editor path you may need to change if the folder path is different
+8. Change the save profile number to match your save file slot in game. "0" corresponds to the first slot, "1" corresponds to the second slot, and so on
+	Note: It is assumed that your game save files are stored at 'C:\Program Files (x86)\Steam\userdata\71731729\262060\remote'. Please let me know if that is not the case
+9. The battle_speed setting you can leave alone, but you can change it from "fast" to "safe" if you are experiencing problems, and not using the Faster Combat mod which I recommend (https://steamcommunity.com/sharedfiles/filedetails/?id=885957080)
+10. Start the DarkestDungeon game, and once you are inside a dungeon double-click the DDbot.exe to begin. If you want to watch the console on another monitor while the application is running you can run it from the command prompt on a second monitor
 
 **Currently Supported:**
 
@@ -61,7 +68,7 @@ Xbox360 CE - https://www.x360ce.com/
 
 - The bot is not designed to handle situations where heroes die or become afflicted during a mission. This shouldn't ever happen on Apprentice or Veteran level missions anyways, unless the player screws up
 
-- The algorithm used to navigate the dungeon is designed to visit every room in the shortest number of moves, regardless of what the mission objective is. This is fine in almost all cases, except when doing some quest missions that have a long and winding map layout. In these cases there could still be a quest curio hiding in one of the extra hallways. In the future the algorithm should "cheat" a little bit to check where the quest curios are  
+- The algorithm used to navigate the dungeon is designed to visit every room in the shortest number of moves, regardless of what the mission objective is. This is fine in almost all cases, except when doing some quest missions that have a long and winding map layout. In these cases there could still be a quest curio hiding in one of the extra hallways that we do not go to. In the future the algorithm should probably cheat a little bit and check where the quest curios are. Also the bot will visit secret rooms if they are discovered, but will not re-route or go out of it's way to visit them currently   
 
 **Known Issues:**
 - Sometimes an enemy dies and leaves behind a corpse, and the next hero attacks the corpse. Not sure if this is caused by an error in the save file data or bug in the generic battle targeting script. It's probably the later, I think I've seen it more frequently occur with the Hellion and Highwayman hero classes
@@ -74,9 +81,21 @@ Xbox360 CE - https://www.x360ce.com/
 
 - Certain curios that can yield treasure where treasure is not guaranteed such a Sarcophagus, ConfessionBooth, LeftLuggage, HolyFountain, UnlockedStrongbox, etc. can sometimes be activated and closed without looting. This is because in these cases we have to take a screenshot and look for the hand icon that appears on the loot screen to determine whether or not there is treasure. Sometimes a controller icon appears in the image that obscurs the hand icon that we are searching for. It has yet to be confirmed whether or not this has been fixed 
 
+**Rebuilding:**
+1. Install the latest version of Python (3.8), open the command line and make sure pip is up to date with "pip install --upgrade pip"
+2. Install all the necessary packages one at a time using the command "pip install *package_name*". I think these are the only ones needed but let me know if not.
+	pyinstaller
+	pyautogui
+	pydirectinput
+	pywin32
+	opencv-python (needed for pyautogui screenshot confidence interval)
+3. Use cd to navigate to the location of the main.py file for darkest dungeon bot
+4. Delete the old DDbot.exe file. Type 'pyinstaller --onefile -c -n DDbot main.py' and wait for the new one to finish building. The spec file and build folder that get generated aren't needed and can be removed after
+
 **Debugging:**
-1. In order to debug, change the debug argument in main from False to True. This prevent the program from doing any key presses
-2. Feel free to drop break points anywhere you want
-3. Manually press the keys on the keyboard to do the button inputs instead as you step through the code
+1. Use whichever Python IDE to run or debug that you want, I like using PyCharm which is free with the base version
+2. In order to debug, change the debug argument in main from False to True. This prevents the program from doing any key presses
+3. Feel free to drop break points anywhere you want
+4. Manually press the keys on the keyboard to do the button inputs instead as you step through the code
 
 Enjoy!

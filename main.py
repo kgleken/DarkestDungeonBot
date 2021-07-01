@@ -4,6 +4,7 @@ import win32gui
 import json
 import time
 import os
+import traceback
 from pathlib import Path
 
 from SaveFileReader import SaveFileReader
@@ -26,6 +27,17 @@ def main(save_editor_path, game_install_location, profile_number, battle_speed='
          debug=False, test_lootscreen=False):
     global provisions_bought
     c = Controller(debug)
+
+    # Import Settings if Applicable
+    filepath = Path(f'{os.getcwd()}/settings.json')
+    if os.path.exists(filepath):
+        f = open(filepath)
+        settings = json.load(f)['settings']
+        save_editor_path = settings['save_editor_path']
+        game_install_location = settings['game_install_location']
+        profile_number = settings['save_profile_number']
+        battle_speed = settings['battle_speed']
+        f.close()
 
     # Initialize Save File Reader
     sfr = SaveFileReader(save_editor_path, game_install_location, profile_number)
@@ -163,5 +175,10 @@ def main(save_editor_path, game_install_location, profile_number, battle_speed='
 
 
 if __name__ == '__main__':
-    main(r'C:\Users\Glek\Desktop\DDSaveEditor-v0.0.68', r'C:\Program Files (x86)\Steam\steamapps\common\DarkestDungeon',
-         profile_number=1, battle_speed='fast', debug=False, test_lootscreen=False)
+    try:
+        main(r'dist/DDSaveEditor-v0.0.68', r'C:\Program Files (x86)\Steam\steamapps\common\DarkestDungeon',
+             profile_number=0, battle_speed='fast', debug=False, test_lootscreen=False)
+    except Exception:
+        traceback.print_exc()
+        print('\nPress Enter key to close')
+        input()
